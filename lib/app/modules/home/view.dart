@@ -16,53 +16,55 @@ class HomePage extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx(
-        () => IndexedStack(index: controller.tabIndex.value, children: [
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(4.0.wp),
-                  child: Text(
-                    'My List',
-                    style: TextStyle(
-                      fontSize: 24.0.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+        () => SafeArea(
+          child: IndexedStack(index: controller.tabIndex.value, children: [
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(4.0.wp),
+                    child: Text(
+                      'My List',
+                      style: TextStyle(
+                        fontSize: 24.0.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
                     ),
                   ),
-                ),
-                Obx(
-                  () => GridView.count(
-                    crossAxisCount: 2,
-                    shrinkWrap: true,
-                    physics: ClampingScrollPhysics(),
-                    children: [
-                      ...controller.tasks
-                          .map((element) => LongPressDraggable(
-                              data: element,
-                              onDragStarted: () =>
-                                  controller.changeDeleting(true),
-                              onDraggableCanceled: (velocity, offset) =>
-                                  controller.changeDeleting(false),
-                              onDragEnd: (details) =>
-                                  controller.changeDeleting(false),
-                              feedback: Opacity(
-                                opacity: .5,
-                                child: TaskCard(
-                                  task: element,
+                  Obx(
+                    () => GridView.count(
+                      crossAxisCount: 2,
+                      shrinkWrap: true,
+                      physics: ClampingScrollPhysics(),
+                      children: [
+                        ...controller.tasks
+                            .map((element) => LongPressDraggable(
+                                data: element,
+                                onDragStarted: () =>
+                                    controller.changeDeleting(true),
+                                onDraggableCanceled: (velocity, offset) =>
+                                    controller.changeDeleting(false),
+                                onDragEnd: (details) =>
+                                    controller.changeDeleting(false),
+                                feedback: Opacity(
+                                  opacity: .5,
+                                  child: TaskCard(
+                                    task: element,
+                                  ),
                                 ),
-                              ),
-                              child: TaskCard(task: element)))
-                          .toList(),
-                      AddCard(),
-                    ],
+                                child: TaskCard(task: element)))
+                            .toList(),
+                        AddCard(),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          ReportPage()
-        ]),
+            ReportPage()
+          ]),
+        ),
       ),
       floatingActionButton: DragTarget(
         builder: (context, candidateData, rejectedData) {

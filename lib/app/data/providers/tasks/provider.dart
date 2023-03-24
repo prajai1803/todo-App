@@ -10,8 +10,11 @@ class TaskProvider {
 
   List<Task> readTask() {
     var tasks = <Task>[];
+    List check = _storage.read(taskKey.toString());
+    if (check.isNotEmpty) {
     List s = jsonDecode(_storage.read(taskKey.toString()));
-    s.forEach((element) => tasks.add(Task.fromJson(element)));
+      s.forEach((element) => tasks.add(Task.fromJson(element)));
+    }
     return tasks;
   }
 
