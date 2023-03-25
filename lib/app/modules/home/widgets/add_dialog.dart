@@ -7,8 +7,9 @@ import 'package:todo/app/modules/home/controller.dart';
 import 'package:todo/app/core/utils/extensions.dart';
 
 class AddDialog extends StatelessWidget {
-  final _homeController = Get.find<HomeController>();
   AddDialog({super.key});
+
+  final _homeController = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {

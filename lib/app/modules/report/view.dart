@@ -59,7 +59,7 @@ class ReportPage extends StatelessWidget {
           var createdTask = _controller.getTotalTask();
           var completedTask = _controller.getTotalDoneTask();
           var liveTask = createdTask - completedTask;
-          var percentage = (completedTask / createdTask * 100).toString();
+          var percentage = (completedTask / createdTask * 100).toStringAsFixed(2);
           return ListView(
             children: [
               Padding(

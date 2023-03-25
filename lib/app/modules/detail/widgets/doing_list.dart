@@ -14,13 +14,13 @@ class DoingList extends StatelessWidget {
             ? Column(
                 children: [
                   Image.asset(
-                    "",
+                    "assets/images/addTask.png",
                     fit: BoxFit.cover,
                     width: 65.0.wp,
                   ),
                   Text('Add Task',
                   style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w500,
                     fontSize: 16.0.wp,
                   ),)
                 ],

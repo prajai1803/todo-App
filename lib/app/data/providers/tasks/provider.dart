@@ -10,15 +10,18 @@ class TaskProvider {
 
   List<Task> readTask() {
     var tasks = <Task>[];
-    List check = _storage.read(taskKey.toString());
-    if (check.isNotEmpty) {
-    List s = jsonDecode(_storage.read(taskKey.toString()));
-      s.forEach((element) => tasks.add(Task.fromJson(element)));
+    try {
+      List<dynamic> tempList = _storage.read(taskKey.toString());
+      for (var element in tempList) {
+        tasks.add(Task.fromJson(element));
+      }
+    } catch (e) {
+      printInfo(info: e.toString());
     }
     return tasks;
   }
 
   void writeTask(List<Task> value) {
-    _storage.write(taskKey, jsonEncode(value));
+    _storage.write(taskKey, value);
   }
 }
